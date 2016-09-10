@@ -93,8 +93,8 @@ public final class MainEditor {
         // require the input text to be the same thing as the replacement text.
         provider.addCompletion(new ShorthandCompletion(provider, "sd",
                 "System.out.println(", "System.out.println("));
-        provider.addCompletion(new ShorthandCompletion(provider, "syserr",
-                "System.err.println(", "System.err.println("));
+        provider.addCompletion(new ShorthandCompletion(provider, "main",
+                "public static void main(String[] args){\n\n}"));
 
         return provider;
 
