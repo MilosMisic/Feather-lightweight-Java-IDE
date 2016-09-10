@@ -1,9 +1,0 @@
-org.fife.ui.autocomplete.AutoCompletion$AutoActivationListener
-org.fife.ui.autocomplete.AutoCompletion
-org.fife.ui.autocomplete.AutoCompletion$AutoCompleteAction
-org.fife.ui.autocomplete.AutoCompletion$ParentWindowListener
-org.fife.ui.autocomplete.AutoCompletion$1
-org.fife.ui.autocomplete.AutoCompletion$LookAndFeelChangeListener
-org.fife.ui.autocomplete.AutoCompletion$PopupWindowListener
-org.fife.ui.autocomplete.AutoCompletion$TextComponentListener
-org.fife.ui.autocomplete.AutoCompletion$ParameterizedCompletionStartAction

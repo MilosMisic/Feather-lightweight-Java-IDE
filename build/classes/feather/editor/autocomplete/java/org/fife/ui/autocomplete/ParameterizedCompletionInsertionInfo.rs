@@ -1,2 +1,0 @@
-org.fife.ui.autocomplete.ParameterizedCompletionInsertionInfo$ReplacementCopy
-org.fife.ui.autocomplete.ParameterizedCompletionInsertionInfo

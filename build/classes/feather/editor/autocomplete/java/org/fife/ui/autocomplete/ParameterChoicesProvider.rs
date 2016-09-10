@@ -1,1 +1,0 @@
-org.fife.ui.autocomplete.ParameterChoicesProvider

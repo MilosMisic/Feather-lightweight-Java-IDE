@@ -1,0 +1,1 @@
+Dodata za test biblioteka hamcrest koja je potrebna za novi JUnit 4.12

@@ -1,0 +1,6 @@
+syntax: glob
+build/*
+nbproject/private/*
+dist/*
+*.orig
+manifest.mf

@@ -1,2 +1,0 @@
-org.fife.ui.autocomplete.ParameterizedCompletionChoicesWindow$1
-org.fife.ui.autocomplete.ParameterizedCompletionChoicesWindow
