@@ -19,7 +19,7 @@ public class Window extends javax.swing.JFrame {
 	public Window() {
 		this.setIconImage(Icons.LOGO.getImage());
 		Persistance.loadOpened();
-		Actions.setWorkspace();
+            Actions.setWorkspace();
 		mainEditor = new MainEditor();
 		initComponents();
 		mainEditor.addOpenedFiles(mainTabPane);
