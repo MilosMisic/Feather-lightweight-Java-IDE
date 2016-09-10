@@ -7,11 +7,11 @@ import javax.swing.*;
 import javax.swing.event.*;
 import feather.persistance.Persistance;
 import feather.properties.Dirs;
-import org.fife.ui.autocomplete.AutoCompletion;
-import org.fife.ui.autocomplete.BasicCompletion;
-import org.fife.ui.autocomplete.CompletionProvider;
-import org.fife.ui.autocomplete.DefaultCompletionProvider;
-import org.fife.ui.autocomplete.ShorthandCompletion;
+import feather.feather.fife.ui.autocomplete.AutoCompletion;
+import feather.feather.fife.ui.autocomplete.BasicCompletion;
+import feather.feather.fife.ui.autocomplete.CompletionProvider;
+import feather.feather.fife.ui.autocomplete.DefaultCompletionProvider;
+import feather.feather.fife.ui.autocomplete.ShorthandCompletion;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
@@ -37,7 +37,7 @@ public final class MainEditor {
         editorPane = new RSyntaxTextArea();
         editorPane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
-        Font font = new Font("Consolas", Font.PLAIN, 20);
+        Font font = new Font("Consolas", Font.PLAIN, 16);
         editorPane.setFont(font);
         editorPane.setTabSize(4);
         editorPane.setLineWrap(true);
@@ -47,12 +47,13 @@ public final class MainEditor {
         editorPane.getDocument().addDocumentListener(new MyDocumentListener());
         scrollPane = new RTextScrollPane(editorPane);
         CompletionProvider provider = createCompletionProvider();
-        try {
-            Theme theme = Theme.load(new FileInputStream(new File("C:\\Users\\Milos\\Desktop\\SINTAKS LIB\\RSyntaxTextArea-feather\\themes\\idea.xml")));
-            theme.apply(editorPane);
-        } catch (IOException ioe) { // Never happens
-            ioe.printStackTrace();
-        }
+//        try {
+//            Theme theme = Theme.load(new FileInputStream(new File("C:\\Users\\Milos\\Documents\\NetBeansProjects\\MyApp\\libs\\RSyntaxTextArea-feather\\themes\\default.xml")));
+//            theme.apply(editorPane);
+//        } catch (IOException ioe) {
+//            System.out.println("Never theme");
+//
+//        }
         AutoCompletion ac = new AutoCompletion(provider);
         ac.install(editorPane);
         return scrollPane;
