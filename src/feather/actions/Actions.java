@@ -4,32 +4,34 @@ import javax.swing.JFileChooser;
 import feather.persistance.Persistance;
 import feather.properties.Dirs;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
+import javax.swing.*;
 
 public class Actions {
 
     public static void setWorkspace() {
+        JDialog dialog;
+        JPanel buttonPanel;
+        JButton browseButton;
+        JTextField textField;
+
         if (Dirs.WORKING_DIRECTORY == null || Dirs.WORKING_DIRECTORY.equals("")) {
-//C\:\\Users\\Milos\\Desktop\\projekti
-            JDialog setWorkspaceDialog = new JDialog();
-            setWorkspaceDialog.setSize(300, 200);
-            setWorkspaceDialog.setLayout(new BorderLayout());
-            JPanel buttonPanel = new JPanel();
 
-            setWorkspaceDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            setWorkspaceDialog.setLocationRelativeTo(null);
-            JButton browseButton = new JButton("Browse");
+            dialog = new JDialog();
+            buttonPanel = new JPanel();
+            browseButton = new JButton("Browse");
+            textField = new JTextField(15);
+
+            dialog.setSize(300, 200);
+            dialog.setLayout(new BorderLayout());
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLocationRelativeTo(null);
+
             buttonPanel.add(browseButton);
-            setWorkspaceDialog.add(buttonPanel, BorderLayout.SOUTH);
+            dialog.add(buttonPanel, BorderLayout.SOUTH);
+            dialog.add(textField, BorderLayout.CENTER);
 
-            JTextField textField = new JTextField(15);
-            setWorkspaceDialog.add(textField, BorderLayout.CENTER);
+            dialog.setVisible(true);
 
-            setWorkspaceDialog.setVisible(true);
             browseButton.addActionListener(e -> {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
