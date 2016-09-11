@@ -28,7 +28,7 @@ public class RightClickMenu {
             projectTree.setSelectionRow(row);
             rightClickMenu.show(evt.getComponent(), evt.getX(), evt.getY());
 
-//*******************************************************************************************\\
+//*******************************************************************************************
             newClass.addActionListener((ActionEvent e) -> {
                 String path = getTreePath(projectTree);
                 String fileName = JOptionPane.showInputDialog("Enter Class Name");
