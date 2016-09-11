@@ -13,21 +13,22 @@ import feather.tree.ProjectTree;
 
 public class Window extends javax.swing.JFrame {
 
-	private final MainEditor mainEditor;
-	String nodeName = "";
-	String nodePath = "";
-	public Window() {
-		this.setIconImage(Icons.LOGO.getImage());
-		Persistance.loadOpened();
-            Actions.setWorkspace();
-		mainEditor = new MainEditor();
-		initComponents();
-		mainEditor.addOpenedFiles(mainTabPane);
-		MyConsole.redirectConsoleTo(ConsolePane);
+    private final MainEditor mainEditor;
+    String nodeName = "";
+    String nodePath = "";
 
-	}
+    public Window() {
+        this.setIconImage(Icons.LOGO.getImage());
+        Persistance.loadOpened();
+        Actions.setWorkspace();
+        mainEditor = new MainEditor();
+        initComponents();
+        mainEditor.addOpenedFiles(mainTabPane);
+        MyConsole.redirectConsoleTo(ConsolePane);
 
-	@SuppressWarnings("unchecked")
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -67,6 +68,7 @@ public class Window extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 projectTreeMouseClicked(evt);
             }
+
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 rightClick(evt);
             }
@@ -175,38 +177,38 @@ public class Window extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-		mainEditor.open(mainTabPane, this);
+        mainEditor.open(mainTabPane, this);
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void closeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeMenuItemActionPerformed
-		new Thread(() -> {
-			mainEditor.closeTab(mainTabPane);
-		}).start();
+        new Thread(() -> {
+            mainEditor.closeTab(mainTabPane);
+        }).start();
     }//GEN-LAST:event_closeMenuItemActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
-		new Thread(() -> {
-			mainEditor.save(mainTabPane, this);
-		}).start();
+        new Thread(() -> {
+            mainEditor.save(mainTabPane, this);
+        }).start();
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-		new Thread(() -> {
-			mainEditor.newDocument(mainTabPane);
-		}).start();
+        new Thread(() -> {
+            mainEditor.newDocument(mainTabPane);
+        }).start();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-		new Thread(() -> {
-			Persistance.StoreOpened();
-		}).start();
+        new Thread(() -> {
+            Persistance.StoreOpened();
+        }).start();
     }//GEN-LAST:event_formWindowClosing
 
     private void RunMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunMenuItemActionPerformed
-		new Thread(() -> {
-			mainEditor.save(mainTabPane, this);
-			new Run().exec(ConsolePane);
-		}).start();
+        new Thread(() -> {
+            mainEditor.save(mainTabPane, this);
+            new Run().exec(ConsolePane);
+        }).start();
 
     }//GEN-LAST:event_RunMenuItemActionPerformed
 
@@ -215,34 +217,35 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_Selection
 
     private void rightClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rightClick
-		new Thread(() -> {
-			new RightClickMenu().TreeRightClick(evt, projectTree);
-		}).start();
+        new Thread(() -> {
+            new RightClickMenu().TreeRightClick(evt, projectTree);
+        }).start();
 
     }//GEN-LAST:event_rightClick
 
     private void projectMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectMenuItemActionPerformed
-		String name = JOptionPane.showInputDialog("Enter Project Name: ");
-		new Project(name);
-		new ProjectTree().addProjectNode(projectTree, name);
+        String name = JOptionPane.showInputDialog("Enter Project Name: ");
+        new Project(name);
+        new ProjectTree().addProjectNode(projectTree, name);
     }//GEN-LAST:event_projectMenuItemActionPerformed
 
     private void projectTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_projectTreeMouseClicked
-		new Thread(() -> {
-			if (evt.getClickCount() == 2) {
-				try {
-					String dir = RightClickMenu.getTreePath(projectTree);
-					if (dir.endsWith(".java") || dir.endsWith(".txt"))
-						mainEditor.open(mainTabPane, dir);
-				} catch (NullPointerException e) {
-				}
-			}
-		}).start();
+        new Thread(() -> {
+            if (evt.getClickCount() == 2) {
+                try {
+                    String dir = RightClickMenu.getTreePath(projectTree);
+                    if (dir.endsWith(".java") || dir.endsWith(".txt")) {
+                        mainEditor.open(mainTabPane, dir);
+                    }
+                } catch (NullPointerException e) {
+                }
+            }
+        }).start();
 
     }//GEN-LAST:event_projectTreeMouseClicked
 
     private void ConsolePaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsolePaneMouseClicked
-		new RightClickMenu().consolePaneRightClick(evt, ConsolePane);
+        new RightClickMenu().consolePaneRightClick(evt, ConsolePane);
     }//GEN-LAST:event_ConsolePaneMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -265,19 +268,19 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
-	public static void main(String args[]) {
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Windows".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-		}
-		java.awt.EventQueue.invokeLater(() -> {
-			new Window().setVisible(true);
-		});
-	}
+    public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Window().setVisible(true);
+        });
+    }
 
 }
