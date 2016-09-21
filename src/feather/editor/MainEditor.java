@@ -7,23 +7,15 @@ import javax.swing.*;
 import javax.swing.event.*;
 import feather.persistance.Persistance;
 import feather.properties.Dirs;
-import feather.feather.fife.ui.autocomplete.AutoCompletion;
-import feather.feather.fife.ui.autocomplete.BasicCompletion;
-import feather.feather.fife.ui.autocomplete.CompletionProvider;
-import feather.feather.fife.ui.autocomplete.DefaultCompletionProvider;
-import feather.feather.fife.ui.autocomplete.ShorthandCompletion;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
-import org.fife.ui.rtextarea.RTextScrollPane;
+
 
 public final class MainEditor {
 
-    private RSyntaxTextArea editorPane;
+    private JTextArea editorPane;
     private JFileChooser fileChooser;
-    private RTextScrollPane scrollPane;
+    private JScrollPane scrollPane;
 
     private boolean doneLoadingFiles;
 
@@ -35,18 +27,14 @@ public final class MainEditor {
 
     public JScrollPane getScrollPane() {
 
-        editorPane = new RSyntaxTextArea();
-        editorPane.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-
+        editorPane = new JTextArea();
         Font font = new Font("Consolas", Font.PLAIN, 16);
         editorPane.setFont(font);
         editorPane.setTabSize(4);
         editorPane.setLineWrap(true);
         editorPane.setMargin(new Insets(20, 40, 0, 0));
-        editorPane.setAutoIndentEnabled(true);
         editorPane.getDocument().addDocumentListener(new MyDocumentListener());
-        scrollPane = new RTextScrollPane(editorPane);
-        CompletionProvider provider = createCompletionProvider();
+        scrollPane = new JScrollPane(editorPane);
 
         editorPane.addKeyListener(new KeyListener() {
             @Override
@@ -71,51 +59,7 @@ public final class MainEditor {
 //            System.out.println("Never theme");
 //
 //        }
-        AutoCompletion ac = new AutoCompletion(provider);
-        ac.install(editorPane);
         return scrollPane;
-    }
-
-    public static void setFont(RSyntaxTextArea textArea, Font font) {
-        if (font != null) {
-            SyntaxScheme ss = textArea.getSyntaxScheme();
-            ss = (SyntaxScheme) ss.clone();
-            for (int i = 0; i < ss.getStyleCount(); i++) {
-                if (ss.getStyle(i) != null) {
-                    ss.getStyle(i).font = font;
-                }
-            }
-            textArea.setSyntaxScheme(ss);
-            textArea.setFont(font);
-        }
-    }
-
-    private CompletionProvider createCompletionProvider() {
-
-        DefaultCompletionProvider provider = new DefaultCompletionProvider();
-
-        // Add completions for all Java keywords. A BasicCompletion is just
-        // a straightforward word completion.
-        provider.addCompletion(new BasicCompletion(provider, "abstract"));
-        provider.addCompletion(new BasicCompletion(provider, "assert"));
-        provider.addCompletion(new BasicCompletion(provider, "break"));
-        provider.addCompletion(new BasicCompletion(provider, "case"));
-        // ... etc ...
-        provider.addCompletion(new BasicCompletion(provider, "transient"));
-        provider.addCompletion(new BasicCompletion(provider, "try"));
-        provider.addCompletion(new BasicCompletion(provider, "void"));
-        provider.addCompletion(new BasicCompletion(provider, "volatile"));
-        provider.addCompletion(new BasicCompletion(provider, "while"));
-
-        // Add a couple of "shorthand" completions. These completions don't
-        // require the input text to be the same thing as the replacement text.
-        provider.addCompletion(new ShorthandCompletion(provider, "sd",
-                "System.out.println(", "System.out.println("));
-        provider.addCompletion(new ShorthandCompletion(provider, "main",
-                "public static void main(String[] args){\n\n}"));
-
-        return provider;
-
     }
 
     public void open(JTabbedPane tabbedPane, JFrame frame) {
@@ -157,9 +101,9 @@ public final class MainEditor {
             try {
                 File file = new File(openedFiles.get(tabName));
                 FileWriter fw = new FileWriter(file);
-                scrollPane = (RTextScrollPane) tabbedPane.getComponentAt(tabbedPane.getSelectedIndex());
+                scrollPane = (JScrollPane) tabbedPane.getComponentAt(tabbedPane.getSelectedIndex());
                 JViewport viewport = scrollPane.getViewport();
-                editorPane = (RSyntaxTextArea) viewport.getView();
+                editorPane = (JTextArea) viewport.getView();
                 String text = editorPane.getText();
                 determineMain(text, file);
                 fw.write(text);
@@ -183,7 +127,7 @@ public final class MainEditor {
         File file = fileChooser.getSelectedFile();
         try (FileWriter fw = new FileWriter(file)) {
             JViewport viewport = scrollPane.getViewport();
-            editorPane = (RSyntaxTextArea) viewport.getView();
+            editorPane = (JTextArea) viewport.getView();
             String text = editorPane.getText();
             determineMain(text, file);
             fw.write(text);

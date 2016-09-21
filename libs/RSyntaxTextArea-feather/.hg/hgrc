@@ -1,7 +1,0 @@
-[paths]
-default = ssh://hg@192.168.0.3/euroicc/RSyntaxTextArea-hg
-default-push = ssh://hg@192.168.0.3/euroicc/RSyntaxTextArea-hg
-
-[ui]
-username = Dragan Bjedov
-
