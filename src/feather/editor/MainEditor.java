@@ -43,9 +43,7 @@ public final class MainEditor {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_G) {
-                    editorPane.setCaretPosition(12);
-                }
+             
             }
 
             @Override
