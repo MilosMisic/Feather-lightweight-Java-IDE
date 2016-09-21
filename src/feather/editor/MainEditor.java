@@ -33,6 +33,8 @@ public final class MainEditor {
         editorPane.setTabSize(4);
         editorPane.setLineWrap(true);
         editorPane.setMargin(new Insets(20, 40, 0, 0));
+        editorPane.setForeground(Color.red);
+        editorPane.add(new TextLineNumber(editorPane));
         editorPane.getDocument().addDocumentListener(new MyDocumentListener());
         scrollPane = new JScrollPane(editorPane);
 

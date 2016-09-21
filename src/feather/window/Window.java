@@ -57,6 +57,7 @@ public class Window extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1200, 800));
         setName("MyEdit"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -65,18 +66,18 @@ public class Window extends javax.swing.JFrame {
         mainSplitPane.setDividerLocation(200);
 
         projectTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 projectTreeMouseClicked(evt);
             }
 
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 rightClick(evt);
             }
         });
-        projectTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                Selection(evt);
-            }
+        projectTree.addTreeSelectionListener(e-> {
+            Selection(e);
         });
         jScrollPane2.setViewportView(projectTree);
 
@@ -92,6 +93,7 @@ public class Window extends javax.swing.JFrame {
         ConsolePane.setRows(5);
         ConsolePane.setMargin(new java.awt.Insets(10, 10, 2, 2));
         ConsolePane.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ConsolePaneMouseClicked(evt);
             }
@@ -110,10 +112,8 @@ public class Window extends javax.swing.JFrame {
 
         projectMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         projectMenuItem.setText("Project");
-        projectMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                projectMenuItemActionPerformed(evt);
-            }
+        projectMenuItem.addActionListener(e -> {
+            projectMenuItemActionPerformed(e);
         });
         jMenu1.add(projectMenuItem);
 
