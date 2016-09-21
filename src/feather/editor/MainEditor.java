@@ -12,6 +12,8 @@ import feather.feather.fife.ui.autocomplete.BasicCompletion;
 import feather.feather.fife.ui.autocomplete.CompletionProvider;
 import feather.feather.fife.ui.autocomplete.DefaultCompletionProvider;
 import feather.feather.fife.ui.autocomplete.ShorthandCompletion;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
@@ -41,11 +43,27 @@ public final class MainEditor {
         editorPane.setTabSize(4);
         editorPane.setLineWrap(true);
         editorPane.setMargin(new Insets(20, 40, 0, 0));
-//        editorPane.setForeground(Color.BLUE);
         editorPane.setAutoIndentEnabled(true);
         editorPane.getDocument().addDocumentListener(new MyDocumentListener());
         scrollPane = new RTextScrollPane(editorPane);
         CompletionProvider provider = createCompletionProvider();
+
+        editorPane.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_G) {
+                    editorPane.setCaretPosition(12);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
 //        try {
 //            Theme theme = Theme.load(new FileInputStream(new File("C:\\Users\\Milos\\Documents\\NetBeansProjects\\MyApp\\libs\\RSyntaxTextArea-feather\\themes\\default.xml")));
 //            theme.apply(editorPane);
